@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FAMILY BAR ONLINE 5.0</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#090611;color:white;font-family:Arial,sans-serif;text-align:center}
+header{padding:35px 15px;background:linear-gradient(135deg,#180b32,#581169,#100921)}
+h1{color:#ffdb54;font-size:32px;text-shadow:0 0 18px #ff39db;margin:10px 0}
+.subtitle{color:#f8baff}
+.neon{font-size:55px;margin:20px}
+section{max-width:550px;margin:20px auto;padding:23px 18px;background:#191029;border:1px solid #693b92;border-radius:18px}
+h2{color:#ffd95b}
+.price{font-size:40px;font-weight:bold;color:#ffd95b}
+button,.btn{display:inline-block;border:0;border-radius:12px;padding:15px 22px;background:#ffcf40;color:#1a1025;font-weight:bold;font-size:16px;cursor:pointer;margin:8px;text-decoration:none}
+.secondary{background:#ae66ff;color:white}
+input{width:100%;padding:14px;margin:8px 0;border-radius:9px;border:1px solid #8054a3;background:#100b1d;color:white;font-size:16px}
+.small{font-size:13px;color:#cbbbdc;line-height:1.7}
+.bank{line-height:2;font-size:17px}
+.room{background:linear-gradient(145deg,#30104c,#0b0618);padding:35px 12px;border-radius:15px}
+footer{padding:30px;color:#b9a6cb}
+</style>
+</head>
+<body>
+<header>
+<div class="neon">🎧🍸🎶</div>
+<h1>FAMILY BAR ONLINE 5.0</h1>
+<p class="subtitle">BAR TRỰC TUYẾN - VUI HẾT NẤC</p>
+<p>Không gian giải trí dành cho cộng đồng Family</p>
+</header>
+
+<section>
+<h2>🎟️ VÉ VÀO BAR</h2>
+<p class="price">1.000 WON</p>
+<p>Hiệu lực 24 giờ kể từ khi được kích hoạt</p>
+<button onclick="document.getElementById('ticket').scrollIntoView({behavior:'smooth'})">MUA VÉ NGAY</button>
+</section>
+
+<section>
+<h2>🌟 PHÒNG BAR ONLINE</h2>
+<div class="room">
+<div class="neon">🪩🎵🍹</div>
+<h2>WELCOME TO FAMILY</h2>
+<p>Giao lưu - Âm nhạc - Livestream</p>
+<p id="roomStatus">Phòng livestream đang chờ mở</p>
+</div>
+<p class="small">Khu vực này là bản xem trước. Phòng livestream và kiểm soát vé sẽ được kết nối sau.</p>
+</section>
+
+<section id="ticket">
+<h2>💳 CHUYỂN KHOẢN MUA VÉ</h2>
+<p class="bank">
+Ngân hàng: <b>NH농협은행</b><br>
+Số tài khoản:<br>
+<b id="account">351-1312-5795-23</b><br>
+Chủ tài khoản:<br>
+<b>NGUYEN THANH THE</b>
+</p>
+<button onclick="copyAccount()">SAO CHÉP SỐ TÀI KHOẢN</button>
+<p>Chuyển khoản 1.000 won / 1 vé</p>
+<p class="small">Sau khi chuyển khoản, điền thông tin bên dưới để chủ quán kiểm tra và duyệt thủ công.</p>
+</section>
+
+<section>
+<h2>✅ YÊU CẦU DUYỆT VÉ</h2>
+<form id="requestForm">
+<input id="guest" placeholder="Tên khách hàng" required maxlength="80">
+<input id="sender" placeholder="Tên người chuyển khoản" required maxlength="80">
+<input id="time" type="datetime-local" required>
+<button type="submit">TẠO NỘI DUNG YÊU CẦU</button>
+</form>
+<p id="result" class="small"></p>
+<button class="secondary" id="copyRequest" style="display:none" onclick="copyRequest()">SAO CHÉP YÊU CẦU</button>
+<p class="small">Gửi nội dung yêu cầu cho chủ quán qua kênh liên hệ đã được xác nhận. Không nhập mật khẩu hay mã OTP.</p>
+</section>
+
+<section>
+<h2>📋 QUY ĐỊNH FAMILY</h2>
+<p>Vui chơi văn minh - Không chất cấm</p>
+<p>Tôn trọng mọi thành viên</p>
+<p>Vé chỉ được kích hoạt sau khi chủ quán xác nhận thanh toán</p>
+</section>
+
+<footer>
+FAMILY BAR ONLINE 5.0<br>
+© 2026 FAMILY
+</footer>
+<script>
+function copyAccount(){
+navigator.clipboard.writeText('351-1312-5795-23').then(()=>alert('Đã sao chép số tài khoản')).catch(()=>alert('Hãy sao chép số tài khoản trên màn hình'));
+}
+let requestText='';
+document.getElementById('requestForm').addEventListener('submit',function(e){
+e.preventDefault();
+const guest=document.getElementById('guest').value.trim();
+const sender=document.getElementById('sender').value.trim();
+const time=document.getElementById('time').value;
+requestText='YÊU CẦU DUYỆT VÉ FAMILY BAR ONLINE\nKhách: '+guest+'\nNgười chuyển khoản: '+sender+'\nThời gian: '+time+'\nSố tiền: 1.000 won\nVui lòng kiểm tra giao dịch và kích hoạt vé.';
+document.getElementById('result').textContent=requestText;
+document.getElementById('copyRequest').style.display='inline-block';
+});
+function copyRequest(){
+navigator.clipboard.writeText(requestText).then(()=>alert('Đã sao chép yêu cầu')).catch(()=>alert('Hãy sao chép nội dung trên màn hình'));
+}
+</script>
+</body>
+</html>
