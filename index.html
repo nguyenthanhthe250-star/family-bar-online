@@ -8,7 +8,7 @@
 <section><h2>📋 QUY ĐỊNH FAMILY</h2><p>Vui chơi văn minh – Không chất cấm</p><p>Tôn trọng mọi thành viên</p><p>Vé chỉ có hiệu lực sau khi chủ quán xác nhận thanh toán.</p></section></main><footer>FAMILY BAR ONLINE © 2026</footer>
 <script>
 // Sau khi thiết lập dịch vụ xác thực mã vé, điền URL HTTPS của API vào đây.
-const VERIFY_API_URL = '';
+const VERIFY_API_URL = 'https://script.google.com/macros/s/AKfycbyi93HkoUz6tG0UHcQRzcpO_PcY6arJxOgF4r6jIs2zMiD9SbuAd3dSrHx2y_QRK7GRCA/exec;
 let requestText='';
 async function copyText(t,id){try{await navigator.clipboard.writeText(t);document.getElementById(id).textContent='Đã sao chép!'}catch{document.getElementById(id).textContent='Hãy nhấn giữ để sao chép: '+t}}
 function makeRequest(){const a=document.getElementById('customer').value.trim(),b=document.getElementById('sender').value.trim();if(!a||!b){alert('Vui lòng điền đủ hai tên.');return}requestText=`YÊU CẦU DUYỆT VÉ FAMILY BAR ONLINE\nKhách: ${a}\nNgười chuyển khoản: ${b}\nThời gian: ${new Date().toLocaleString('vi-VN')}\nSố tiền: 1.000 won\nVui lòng kiểm tra giao dịch và gửi mã vé 24 giờ qua KakaoTalk.`;document.getElementById('request').textContent=requestText}
