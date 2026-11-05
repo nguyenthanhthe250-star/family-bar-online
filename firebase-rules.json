@@ -1,0 +1,32 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "admin": {
+      ".read": "auth != null && auth.uid === 'yOI3ShZQhfWehvh1b9n1FOsFqWS2'",
+      ".write": "auth != null && auth.uid === 'yOI3ShZQhfWehvh1b9n1FOsFqWS2'"
+    },
+    "requests": {
+      ".read": "auth != null && auth.uid === 'yOI3ShZQhfWehvh1b9n1FOsFqWS2'",
+      "$uid": {
+        ".read": "auth != null && auth.uid === $uid",
+        ".write": "auth != null && (auth.uid === 'yOI3ShZQhfWehvh1b9n1FOsFqWS2' || (auth.uid === $uid && newData.child('uid').val() === auth.uid && newData.child('status').val() === 'pending' && newData.child('email').val() === auth.token.email && newData.child('sender').isString() && newData.child('sender').val().length >= 2 && newData.child('sender').val().length <= 80 && newData.hasChildren(['uid','email','sender','status','createdAt']) && (!data.exists() || data.child('status').val() !== 'pending')))",
+        ".validate": "newData.hasChildren(['uid','email','sender','status','createdAt'])"
+      }
+    },
+    "tickets": {
+      ".read": "auth != null && auth.uid === 'yOI3ShZQhfWehvh1b9n1FOsFqWS2'",
+      "$uid": {
+        ".read": "auth != null && auth.uid === $uid",
+        ".write": "auth != null && auth.uid === 'yOI3ShZQhfWehvh1b9n1FOsFqWS2'"
+      }
+    },
+    "chat": {
+      ".read": "auth != null && (auth.uid === 'yOI3ShZQhfWehvh1b9n1FOsFqWS2' || (root.child('tickets').child(auth.uid).child('expiresAt').isNumber() && root.child('tickets').child(auth.uid).child('expiresAt').val() > now))",
+      "$msg": {
+        ".write": "auth != null && !data.exists() && (auth.uid === 'yOI3ShZQhfWehvh1b9n1FOsFqWS2' || (root.child('tickets').child(auth.uid).child('expiresAt').isNumber() && root.child('tickets').child(auth.uid).child('expiresAt').val() > now))",
+        ".validate": "newData.hasChildren(['uid','name','text','at']) && newData.child('uid').val() === auth.uid && newData.child('name').isString() && newData.child('name').val().length <= 80 && newData.child('text').isString() && newData.child('text').val().length > 0 && newData.child('text').val().length <= 300"
+      }
+    }
+  }
+}
